@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:hubtel_coding_challenge_repo/widgets/bottom_nav.dart';
 import 'package:hubtel_coding_challenge_repo/widgets/floating_action_button.dart';
@@ -34,9 +36,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool isLoading = true;
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 3), () {
+      isLoading = false;
+      setState(() {});
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return isLoading?
+    const Scaffold(
+      body: Center(child: CircularProgressIndicator(),),
+    ) :const  Scaffold(
 
         // floating action button
         floatingActionButton: FloatingActionButtonWidget(),
